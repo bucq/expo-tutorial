@@ -1,4 +1,4 @@
-import { ImageSourcePropType, View } from 'react-native';
+import { ImageSourcePropType, View, StyleSheet } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
@@ -50,7 +50,7 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
 
     return (
         <GestureDetector gesture={drag}>
-            <Animated.View style={[containerStyle, { top: 0 }]}>
+            <Animated.View style={[containerStyle, styles.draggableContainer]}>
                 <GestureDetector gesture={doubleTap}>
                     <Animated.Image
                         source={stickerSource}
@@ -62,3 +62,11 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
         </GestureDetector>
     );
 }
+
+const styles = StyleSheet.create({
+  draggableContainer: {
+    // ImageBackground内で自由に動かせるように絶対位置を指定
+    top: -350, // 初期位置調整
+    // アニメーションを適用するViewのスタイル。サイズは子要素のサイズに依存します。
+  },
+});

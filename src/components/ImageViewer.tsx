@@ -1,19 +1,16 @@
-import { View, ImageSourcePropType, StyleSheet,Text } from 'react-native';
-import { Image, ImageBackground } from 'expo-image';
-import { PropsWithChildren } from 'react';
+import { ImageSourcePropType, StyleSheet, } from 'react-native';
+import { Image,  } from 'expo-image';
 
 
-type Props = PropsWithChildren<{
+type Props = {
   imgSource: ImageSourcePropType;
   selectedImage?: string;
-}>;
+};
 
-export default function ImageViewer({ imgSource, selectedImage, children}: Props) {
+export default function ImageViewer({ imgSource, selectedImage}: Props) {
   const imageSource = selectedImage ? { uri: selectedImage } : imgSource;
-
-  return (<ImageBackground source={imageSource} style={styles.image}>
-    {children}
-  </ImageBackground>);
+  return (<Image source={imageSource} style={styles.image}>
+  </Image>);
 }
 
 const styles = StyleSheet.create({
